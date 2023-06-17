@@ -1,0 +1,17 @@
+#test using normal distribution
+library(stats)
+
+pdf <- function(x) {
+  dnorm(x, mean = 0, sd = 1)
+}
+
+cdf <- function(x) {
+  pnorm(x, mean = 0, sd = 1)
+}
+
+RDPQ <- rdpq(pdf, cdf)
+
+RDPQ$d(0)
+RDPQ$p(0.5)
+RDPQ$q(0.5)
+RDPQ$r(10)
