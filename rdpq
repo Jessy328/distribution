@@ -1,24 +1,20 @@
 rdpq <- function(pdf, cdf) {
-  r <- function(n) {
-    sample(q(runif(n)), n, replace = TRUE)
-  }
-  
-  d <- function(x) {
-    deriv <- function(x) {
-      eps <- 1e-6
-      (cdf(x + eps) - cdf(x - eps)) / (2 * eps)
-    }
-    pdf(x) / deriv(x)
-  }
-
+  # Define the p function
   p <- function(q) {
-    uniroot(function(x) cdf(x) - q, interval = c(-Inf, Inf))$root
-  }
-
+    integrate(pdf, lower = -Inf, upper = q)$value }
+  # Define the q function
   q <- function(p) {
-    uniroot(function(x) cdf(x) - p, interval = c(-Inf, Inf))$root
+    uniroot(function(x) p(x) - p, interval = c(-10,10))$root }
+  # Define the d function
+  d<- function(x) {
+    diff(cdf(x+c(-0.00001,0.00001)))/0.00002
   }
 
-  return(list(d = d, p = p, q = q, r = r))
+  # Define the r function
+  r <- function(n) {
+    x <- numeric(n)
+    for (i in 1:n) {
+      x[i] <- uniroot(function(x) cdf(x) - runif(1), interval = c(-10,10))$root }
+    x }
+  list(p = p, q = q, d = d, r = r)
 }
-
