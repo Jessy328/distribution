@@ -1,9 +1,9 @@
 Package: RDPQ
 Title: Get r, d, p, q functions.
 Version: 0.1.0
-Authors: Jiayu
+Authors: c(person(given = 'Jiayu',family = 'Zhu'))
 Description: This package is used to easilier get the r, d, p, q functions.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+License: `use_mit_license()`, `use_gpl3_license()` ,`usethis::test()` or friends to pick a
     license
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
